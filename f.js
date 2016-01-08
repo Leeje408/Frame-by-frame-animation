@@ -2,10 +2,10 @@ window.onload = function(){
     moveA();
     moveB();
 };
-function createMo(show, po, offset){
+function createMo(show, bp, offset){
     this.show = show;
-    this.po = po;
-    this.bp = po;
+    this.po = 0;
+    this.bp = bp;
     this.offset = offset;
 }
 function moveB() {
