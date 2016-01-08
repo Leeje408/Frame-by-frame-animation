@@ -11,20 +11,44 @@ function createMo(show, bp, offset){
 function moveB() {
     var show = document.getElementById("win");
     var px = new createMo(show,6000,-75);
-    mo(show, px.po, px.bp, 0, 1, px.offset, 0, 10);
+    mo(show, px, 10);
 }
-function mo(show, pox, bpx, poy, bpy, offsetx, offsety, time) {
+function mo() {
+    var show, time;
+    var px = new Object();
+    var py = new Object();
+    if(arguments.length == 3){
+        show = arguments[0];
+        px = arguments[1];
+        py = { poy:0, bpy:1, offset:0}
+        time = arguments[2];
+    } else if(arguments.length == 4){
+        show = arguments[0];
+        px = arguments[1];
+        py =arguments[2];
+        time = arguments[3];    
+    } else{
+        console.log("请检查mo()参数");
+        return false;
+    }
     this.st = setTimeout(function (){
-        pox %= bpx;
-        poy %= bpy;
-        show.style.backgroundPosition = pox + "px " + poy + "px";
-        if(pox == 0) { poy += offsety; }
-        pox += offsetx;
-        mo(show, pox, bpx, poy, bpy, offsetx, offsety, time);
+        px.pox %= px.bpx;
+        py.poy %= py.bpy;
+        show.style.backgroundPosition = px.pox + "px " + py.poy + "px";
+        if(px.pox == 0) { py.poy += py.offset; }
+        px.pox += px.offset;
+        mo(show, px, py, time);
         }, time); 
 }
 function moveA(){
     var show = document.getElementById("b");
-    var offsetx = -140, offsety = 80, pox = 560, poy = 160;
-    mo(show, pox, pox, poy, poy, offsetx, offsety, 100);
+    var px = new Object();
+    var py = new Object();
+    px.pox = 560;
+    px.bpx = px.pox;
+    px.offset = -140;
+    py.poy = 160;
+    py.bpy = py.poy;
+    py.offset = 80;
+    mo(show, px, py, 100);
 }
